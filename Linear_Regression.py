@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt 
 #%matplotlib inline
 
-Linear_data = pd.read_csv("LinearRegressionTest.csv") #LinearRegressionTest.csv   #Housing.csv
+Linear_data = pd.read_csv("Housing.csv") #LinearRegressionTest.csv   #Housing.csv
 print(Linear_data)
 
 X_train = Linear_data['lotsize'].to_numpy().reshape(-1,1)
