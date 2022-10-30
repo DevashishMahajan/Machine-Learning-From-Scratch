@@ -2,3 +2,4 @@
 From scratch implementation of ML algoriths.
 1) Linear Regression.
 2) Logistic Regression.
+3) KNN
