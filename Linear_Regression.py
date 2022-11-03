@@ -1,16 +1,22 @@
 # Linear Regression From Scratch for Single feature using gradient descent
  
+#Importing necessary libraries
 import pandas as pd 
 import matplotlib.pyplot as plt 
 from sklearn.metrics import mean_squared_error,mean_absolute_error,r2_score
 #%matplotlib inline
 
+#Read CSV file as dataframe
 Linear_data = pd.read_csv("LinearRegressionTest.csv") #LinearRegressionTest.csv   #Housing.csv
 print(Linear_data)
 
+#Feature
 X_train = Linear_data['lotsize'].to_numpy().reshape(-1,1)
+
+#Label
 y_train= Linear_data['price']
 
+#Scaling features
 from sklearn.preprocessing import StandardScaler
 
 scaler=StandardScaler()
@@ -19,10 +25,11 @@ X_train=scaler.fit_transform(X_train)
 print(X_train)
 print(y_train)
 
-
+#Scatter plot to visualize relation between feature and label
 plt.scatter(X_train,y_train)
 plt.show()
 
+#Loss function Mean Square Error(MSE)
 def loss_function(m,b,X_train,y_train):
     Square_Error=0
     for i in range(len(y_train)):
