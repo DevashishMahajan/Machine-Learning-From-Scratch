@@ -155,7 +155,7 @@ print(mean_squared_error(y_train, y_pred)) #2418.975069252075
 print(mean_absolute_error(y_train, y_pred)) #28.808864265927877
 print(r2_score(y_train, y_pred)) #0.9917007222961415
 
-
+# Linear regression from sklearn
 from sklearn.linear_model import LinearRegression
 
 
