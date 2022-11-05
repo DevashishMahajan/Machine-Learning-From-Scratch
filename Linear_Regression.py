@@ -144,7 +144,7 @@ class LR():
         return ((X*self.m) + self.b)
     
     
-        
+# Linear Regression from LR() class        
 lr=LR()
 
 lr.fit(X_train,y_train,EPOCHS=20)        
