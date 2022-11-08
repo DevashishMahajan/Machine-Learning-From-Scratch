@@ -32,7 +32,9 @@ class LRGD:
     def __init__(self,eta = 0.01, n_iterations = 1000 ):
         self.eta = eta
         self.n_iterations = n_iterations
-    
+
+    # fit method function
+    #arguments features (X) and labels (y)
     def fit(self, X,y):
         #full batch gradient descent method
         # adding X=1 for bias
@@ -69,7 +71,8 @@ class LRGD:
         self.coeffs = self.W_wb[1:]
         self.gradients = gradients
         return self
-        
+
+    #predict method function    
     def predict(self,X):
         X_b = np.ones(X.shape[0]).reshape(-1,1)
         X_w = X
@@ -79,15 +82,27 @@ class LRGD:
         return y_pred
         
 
-
+#Instantiate LR class
 fnlrgd = LRGD()
+
 from sklearn.preprocessing import StandardScaler
 sc = StandardScaler()
 X_train = sc.fit_transform(X_train)
+
+#Fit model on data
 fnlrgd.fit(X_train,y_train)
 
 X_test = sc.transform(X_test)
+
+#predict on test data
 y_pred = fnlrgd.predict(X_test)
+
+
+#x coefients
 fnlrgd.coeffs
+
+#biases
 fnlrgd.intercept
+
+#gradients
 fnlrgd.gradients
