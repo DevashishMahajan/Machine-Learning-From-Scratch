@@ -40,7 +40,7 @@ class LRGD:
         # adding X=1 for bias
         
         #X_b ==> bias value
-        X_b = np.ones(X.shape[0]).reshape(-1,1)
+        X_b = np.ones(X.shape[0]).reshape(-1,1) #Convert to single column
         
         #X_w ==> feature values
         X_w = X
@@ -61,7 +61,10 @@ class LRGD:
         #Train model for n_iterations (EPOCHS)
         for iteration in range(self.n_iterations):
             
-            gradients = 2./X.shape[0] * np.matmul(X_wb.T,(np.matmul(X_wb, self.W_wb) - y))
+            # MSE = (y_pred - y_actual)**2
+            # y_pred = X_
+            gradients = 2./X.shape[0] * 
+            np.matmul(X_wb.T,(np.matmul(X_wb, self.W_wb) - y))
           
             # New weights = Old weight 
             self.W_wb= self.W_wb - self.eta * gradients
@@ -85,6 +88,7 @@ class LRGD:
 #Instantiate LR class
 fnlrgd = LRGD()
 
+#Scaling data using StandardScaler from sklearn
 from sklearn.preprocessing import StandardScaler
 sc = StandardScaler()
 X_train = sc.fit_transform(X_train)
