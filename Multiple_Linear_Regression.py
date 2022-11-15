@@ -96,6 +96,7 @@ X_train = sc.fit_transform(X_train)
 #Fit model on data
 fnlrgd.fit(X_train,y_train)
 
+#Scale test data
 X_test = sc.transform(X_test)
 
 #predict on test data
