@@ -62,11 +62,12 @@ class LRGD:
         for iteration in range(self.n_iterations):
             
             # MSE = (y_pred - y_actual)**2
-            # y_pred = X_
-            gradients = 2./X.shape[0] * 
-            np.matmul(X_wb.T,(np.matmul(X_wb, self.W_wb) - y))
+            # y_pred = X_wb * W_wb
+
+		#gradient = 2/m  * X * ( X*W - y)
+            gradients = 2./X.shape[0] * np.matmul( X_wb.T,  (np.matmul  (X_wb, self.W_wb)   - y)  )
           
-            # New weights = Old weight 
+            # New weights = Old weight - eta * gradients
             self.W_wb= self.W_wb - self.eta * gradients
          
                            
