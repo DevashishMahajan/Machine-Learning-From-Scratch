@@ -81,6 +81,8 @@ class LRGD:
         X_b = np.ones(X.shape[0]).reshape(-1,1)
         X_w = X
         X_wb = np.concatenate((X_b,X_w),axis = 1)
+	
+	#predict 
         y_pred = np.matmul(X_wb,self.W_wb)
         
         return y_pred
