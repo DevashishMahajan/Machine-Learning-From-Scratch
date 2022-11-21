@@ -4,20 +4,30 @@ Created on Tue Nov  1 19:17:14 2022
 
 @author: Devashish
 """
+# Linear Regression From Scratch for using normal equation
+
+# Importing necessary libraries
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.metrics import mean_squared_error
 
+# Read the CSV file as pandas dataframe
 df = pd.read_csv("Boston.csv")
+
+# One hot encoding of binary features
 df=pd.get_dummies(df,drop_first=True)
 
+# Feature columns
 X=df.iloc[:,:-1]
 
+# Label column
 y=df.iloc[:,-1]
 
-X_train, X_test, y_train, y_test= train_test_split(X,y,train_size=0.2,random_state=2022)
+# Train test split of data
+X_train, X_test, y_train, y_test= train_test_split(X,y,
+					train_size=0.2,random_state=2022)
 
 #Create class of Linear Regression
 class LR:
@@ -26,30 +36,30 @@ class LR:
         pass
 
     # fit method function
-    #arguments features (X) and labels (y)
+    # arguments features (X) and labels (y)
     def fit(self, X,y):
-        #school book method
+        # school book method
         # adding X=1 for bias
         X_b = np.ones(X.shape[0]).reshape(-1,1) #initialize bias as 1
         
         
-        X_w = X  #feature matrix
+        X_w = X  # feature matrix
         
         X_wb = np.concatenate((X_b,X_w),axis = 1)   #concat bias weight and feature 
         
         # W = (X.T X)-1  (X.T y)
         
-        #np.matmul(X_wb.T,X_wb)  ===> (X.T * X)
+        # np.matmul(X_wb.T,X_wb)  ===> (X.T * X)
         
-        #np.linalg.inv(np.matmul(X_wb.T,X_wb))  ===> (X.T *  X)-1
+        # np.linalg.inv(np.matmul(X_wb.T,X_wb))  ===> (X.T *  X)-1
         
-        #np.matmul(np.linalg.inv(np.matmul(X_wb.T,X_wb)), X_wb.T)  ===> (X.T X)-1 * X.T 
+        # np.matmul(np.linalg.inv(np.matmul(X_wb.T,X_wb)), X_wb.T)  ===> (X.T X)-1 * X.T 
         
-        #np.matmul(np.matmul(np.linalg.inv(np.matmul(X_wb.T,X_wb)), X_wb.T),y)  ===> (X.T X)-1  (X.T y)
+        # np.matmul(np.matmul(np.linalg.inv(np.matmul(X_wb.T,X_wb)), X_wb.T),y)  ===> (X.T X)-1  (X.T y)
         
         self.W_wb = np.matmul(np.matmul(np.linalg.inv(np.matmul(X_wb.T,X_wb)), X_wb.T),y)
         
-        #Bias is at 0th index
+        # Bias is at 0th index
         self.intercept= self.W_wb[0]
         
         #Weight from 0th index onwards
@@ -57,7 +67,7 @@ class LR:
     
         return self
     
-    #predict method function    
+    # predict method function    
     def predict(self,X):
         X_b = np.ones(X.shape[0]).reshape(-1,1)
         X_w = X
@@ -68,19 +78,19 @@ class LR:
         
     
 
-#Instantiate LR class
+# Instantiate LR class
 fnlr = LR()
 
 
-#Fit model on data
+# Fit model on data
 fnlr.fit(X_train,y_train)
 
 
-#predict on test data
+# predict on test data
 y_pred = fnlr.predict(X_test)
 
 
-#x coefients
+# x coefients
 fnlr.coeffs 
 """
 array([-9.96376947e-02,  1.88315720e-02,  2.76580395e-01,  2.50042248e+00,
@@ -89,10 +99,10 @@ array([-9.96376947e-02,  1.88315720e-02,  2.76580395e-01,  2.50042248e+00,
        -4.94078229e-01])
 """
 
-#biases
+# biases
 fnlr.intercept #10.04518228086959
 
-#Accuracy 
+# Accuracy 
 mean_squared_error(y_test, y_pred)  #27.796804416870874
 
 
