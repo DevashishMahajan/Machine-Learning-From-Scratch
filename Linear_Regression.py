@@ -1,22 +1,22 @@
 # Linear Regression From Scratch for Single feature using gradient descent
  
-#Importing necessary libraries
+# Importing necessary libraries
 import pandas as pd 
 import matplotlib.pyplot as plt 
 from sklearn.metrics import mean_squared_error,mean_absolute_error,r2_score
-#%matplotlib inline
+# %matplotlib inline
 
-#Read CSV file as dataframe
+# Read CSV file as dataframe
 Linear_data = pd.read_csv("LinearRegressionTest.csv") #LinearRegressionTest.csv   #Housing.csv
 print(Linear_data)
 
-#Feature
+# Feature
 X_train = Linear_data['lotsize'].to_numpy().reshape(-1,1)
 
-#Label
+# Label
 y_train= Linear_data['price']
 
-#Scaling features
+# Scaling features
 from sklearn.preprocessing import StandardScaler
 
 scaler=StandardScaler()
@@ -25,11 +25,11 @@ X_train=scaler.fit_transform(X_train)
 print(X_train)
 print(y_train)
 
-#Scatter plot to visualize relation between feature and label
+# Scatter plot to visualize relation between feature and label
 plt.scatter(X_train,y_train)
 plt.show()
 
-#Loss function Mean Square Error(MSE)
+# Loss function Mean Square Error(MSE)
 def loss_function(m,b,X_train,y_train):
     Square_Error=0
     for i in range(len(y_train)):
@@ -41,15 +41,15 @@ def loss_function(m,b,X_train,y_train):
 
 m=1
 b=0
-print("MSE =",loss_function(m,b,X_train,y_train)) #MSE = 1243019.4210526317
+print("MSE =",loss_function(m,b,X_train,y_train))  # MSE = 1243019.4210526317
 
 m=2
 b=0
-print("MSE =",loss_function(m,b,X_train,y_train)) #MSE = 1215814.5263157894
+print("MSE =",loss_function(m,b,X_train,y_train))  # MSE = 1215814.5263157894
 
 m=5
 b=0
-print("MSE =",loss_function(m,b,X_train,y_train)) #MSE = 1136011.8421052631
+print("MSE =",loss_function(m,b,X_train,y_train))  # MSE = 1136011.8421052631
 
 
 #### Gradient descent #### 
@@ -93,7 +93,8 @@ plt.scatter(X_train,y_train)
 plt.plot([x_init,x_final],[y_init,y_final],color = 'r', linestyle = '-')
 y_init_pred = x_init*m + b
 y_final_pred = x_final*m +b
-#Predicted line after applying linear regression using gradient descent
+
+# Predicted line after applying linear regression using gradient descent
 plt.plot([x_init,x_final],[y_init_pred,y_final_pred],color = 'y', linestyle = '--')
 plt.show()
 
@@ -144,20 +145,17 @@ class LR():
         return ((X*self.m) + self.b)
     
     
-<<<<<<< HEAD
 # Linear regression from LR class        
-=======
-# Linear Regression from LR() class        
->>>>>>> c0bc6aff5938b95fc1dfe7fd7334681b6d666a30
 lr=LR()
 
 lr.fit(X_train,y_train,EPOCHS=20)        
 
+# Predict
 y_pred=lr.predict(X_train)        
 
-print(mean_squared_error(y_train, y_pred)) #2418.975069252075
-print(mean_absolute_error(y_train, y_pred)) #28.808864265927877
-print(r2_score(y_train, y_pred)) #0.9917007222961415
+print(mean_squared_error(y_train, y_pred))  # 2418.975069252075
+print(mean_absolute_error(y_train, y_pred))  # 28.808864265927877
+print(r2_score(y_train, y_pred))  # 0.9917007222961415
 
 
 # Linear regression from sklearn
@@ -165,10 +163,12 @@ from sklearn.linear_model import LinearRegression
 
 lnr=LinearRegression()
 lnr.fit(X_train,y_train)
+
+# Predict
 y_pred=lnr.predict(X_train)        
 
-print(mean_squared_error(y_train, y_pred)) #2418.975069252075
-print(mean_absolute_error(y_train, y_pred)) #28.808864265927877
-print(r2_score(y_train, y_pred)) #0.9917007222961415
+print(mean_squared_error(y_train, y_pred))  # 2418.975069252075
+print(mean_absolute_error(y_train, y_pred))  # 28.808864265927877
+print(r2_score(y_train, y_pred))  # 0.9917007222961415
 
 
